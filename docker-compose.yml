@@ -1,0 +1,15 @@
+services:
+  bot:
+    build: .
+    image: magicpin-merchant-bot:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8080"
+      LLM_PROVIDER: "${LLM_PROVIDER:-groq}"
+      LLM_MODEL: "${LLM_MODEL:-openai/gpt-oss-120b}"
+    restart: "no"
+    # Single long-lived process — do not scale replicas during the judge window.

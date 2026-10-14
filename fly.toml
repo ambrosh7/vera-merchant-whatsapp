@@ -1,0 +1,27 @@
+# fly launch --no-deploy  (then: fly secrets set LLM_API_KEY=... && fly deploy)
+app = "magicpin-merchant-bot"
+primary_region = "sin"
+
+[build]
+
+[env]
+  HOST = "0.0.0.0"
+  PORT = "8080"
+  LLM_PROVIDER = "groq"
+  LLM_MODEL = "openai/gpt-oss-120b"
+  MAX_TICK_ACTIONS = "3"
+  TICK_DEADLINE_SECONDS = "25"
+  COMPOSER_PROMPT_VERSION = "composer_v1"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1

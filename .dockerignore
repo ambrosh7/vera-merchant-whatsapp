@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.git/
+.env
+*.md
+!bot/README.md
+scripts/
+eval.md
+edge-case.md
+agent-transcripts/
+.cursor/
+**/.DS_Store
+*.jsonl
+!submission.jsonl

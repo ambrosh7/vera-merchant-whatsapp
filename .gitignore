@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+eval_runs/
+dataset/expanded/
+.DS_Store
+frontend/node_modules/
+frontend/dist/
+.keep_public.log
+*.log

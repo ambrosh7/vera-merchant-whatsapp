@@ -1,0 +1,5 @@
+BOT_URL=https://foot-sherman-lafayette-traditional.trycloudflare.com
+
+# Kept alive by scripts/keep_public_up.sh — leave that process running.
+# Health: curl -fsS \"$BOT_URL/v1/healthz\"
+# LLM-upgraded submission.jsonl: 20/30 via Groq, 10 deterministic fallback.
