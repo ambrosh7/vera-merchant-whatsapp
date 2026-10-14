@@ -45,8 +45,21 @@ export type ComposeResult = {
   contexts: Record<string, unknown>
 }
 
+/** Local `npm run dev` proxies `/v1` to the bot. Production calls Railway directly. */
+const API_BASE = (
+  import.meta.env.VITE_API_BASE ??
+  (import.meta.env.DEV
+    ? ''
+    : 'https://vera-merchant-whatsapp-production.up.railway.app')
+).replace(/\/$/, '')
+
+function apiUrl(path: string): string {
+  return `${API_BASE}${path}`
+}
+
 async function getJson<T>(path: string): Promise<T> {
-  const res = await fetch(path)
+  const url = apiUrl(path)
+  const res = await fetch(url)
   if (!res.ok) throw new Error(`${path} → ${res.status}`)
   return res.json() as Promise<T>
 }
@@ -61,7 +74,7 @@ export async function composeDemo(input: {
   trigger_id: string
   customer_id?: string | null
 }): Promise<ComposeResult> {
-  const res = await fetch('/v1/demo/compose', {
+  const res = await fetch(apiUrl('/v1/demo/compose'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
